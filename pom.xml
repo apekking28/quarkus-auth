@@ -58,6 +58,12 @@
             <artifactId>postgresql</artifactId>
         </dependency>
 
+        <!--  quarkus security       -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-security</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-arc</artifactId>

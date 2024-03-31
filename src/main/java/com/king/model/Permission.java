@@ -1,30 +1,24 @@
 package com.king.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GenericGenerator;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Entity
-@Table(name = "roles")
+@Table(name = "permissions")
 @DynamicInsert
 @DynamicUpdate
-public class Role {
+public class Permission {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private String id;
-
-    @Enumerated(EnumType.STRING)
-    private Roles name;
-
-    @JsonIgnore
-    @ManyToMany(mappedBy = "roles")
-    private List<User> users = new ArrayList<>();
+    private String name;
+    private String guardName;
 
     public String getId() {
         return id;
@@ -34,19 +28,19 @@ public class Role {
         this.id = id;
     }
 
-    public Roles getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(Roles name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public List<User> getUsers() {
-        return users;
+    public String getGuardName() {
+        return guardName;
     }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
+    public void setGuardName(String guardName) {
+        this.guardName = guardName;
     }
 }

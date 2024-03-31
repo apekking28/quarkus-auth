@@ -1,16 +1,19 @@
-package com.king.dto.request;
+package com.king.dto.response;
 
-import org.eclipse.microprofile.openapi.annotations.media.Schema;
-
-public class UserRequestDTO {
-    @Schema(example = "john doe", description = "Name of user")
+public class UserResponseDTO {
+    private String id;
     private String name;
-
-    @Schema(example = "johndoe@gmail.com", description = "Email of user")
     private String email;
 
-    @Schema(example = "Password1!", description = "Password of user")
     private String password;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;

@@ -25,21 +25,21 @@ public class UserService {
         addUser.setName(request.getName());
         addUser.setEmail(request.getEmail());
         addUser.setPassword(request.getPassword());
-        addUser.addRole(roleRepository.findById(1L));
+        addUser.addRole(roleRepository.findByName());
 
         userRepository.persist(addUser);
         return addUser;
     }
 
+    @Transactional
     public List<User> listAllUsers() {
         return userRepository.findAll().stream().toList();
     }
 
     @Transactional
-    public User updateUser(Long userId, UserRequestDTO request) {
+    public User updateUser(String userId, UserRequestDTO request) {
         User existingUser = userRepository.findByIdOptional(userId)
                 .orElseThrow(() -> new IllegalArgumentException("User with id " + userId + " not found"));
-
 
         existingUser.setName(request.getName());
         existingUser.setEmail(request.getEmail());
@@ -47,7 +47,8 @@ public class UserService {
         return existingUser;
     }
 
-    public String deleteUser(Long userId) {
+    @Transactional
+    public String deleteUser(String userId) {
         User existingUser = userRepository.findByIdOptional(userId)
                 .orElseThrow(() -> new IllegalArgumentException("User with id " + userId + " not found"));
 

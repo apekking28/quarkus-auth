@@ -17,24 +17,44 @@ public class UserController {
 
     @GET
     public Response getAllUsers() {
-        return Response.ok(userService.listAllUsers()).build();
+        try {
+            var response = userService.listAllUsers();
+            return Response.ok(response).build();
+        } catch (Exception ex) {
+            return Response.serverError().entity(ex.getMessage()).build();
+        }
     }
 
     @POST
     public Response addUser(UserRequestDTO request) {
-        return Response.status(Response.Status.CREATED).entity(userService.addUser(request)).build();
+        try {
+            var response = userService.addUser(request);
+            return Response.ok(response).build();
+        } catch (Exception ex) {
+            return Response.serverError().entity(ex.getMessage()).build();
+        }
     }
 
     @PUT
     @Path("/{userId}")
-    public Response updateUser(@PathParam("userId") Long userId,UserRequestDTO request) {
-        return Response.ok(userService.updateUser(userId,request)).build();
+    public Response updateUser(@PathParam("userId") String userId, UserRequestDTO request) {
+        try {
+            var response = userService.updateUser(userId, request);
+            return Response.ok(response).build();
+        } catch (Exception ex) {
+            return Response.serverError().entity(ex.getMessage()).build();
+        }
     }
 
     @DELETE
     @Path("/{userId}")
-    public Response deleteUser(@PathParam("userId") Long userId) {
-        return Response.ok(userService.deleteUser(userId)).build();
+    public Response deleteUser(@PathParam("userId") String userId) {
+        try {
+            var response = userService.deleteUser(userId);
+            return Response.ok(response).build();
+        } catch (Exception ex) {
+            return Response.serverError().entity(ex.getMessage()).build();
+        }
     }
 
 }
